@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 5436328690783808987}
   - component: {fileID: 1714183264469907667}
   - component: {fileID: 620928186865150021}
-  - component: {fileID: 8672983120881025616}
   - component: {fileID: 9157905792081432292}
   - component: {fileID: 1657103780171460323}
+  - component: {fileID: 6800984449978850441}
   m_Layer: 0
   m_Name: RightArrow
   m_TagString: Note
@@ -118,8 +118,35 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &8672983120881025616
-BoxCollider2D:
+--- !u!114 &9157905792081432292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280949355608910958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df8ecb79b14d9f74fbd316e7e1129153, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bpm: 120
+  beatsAhead: 4
+--- !u!114 &1657103780171460323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280949355608910958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3962c74b66ccaf647a57aaf42a876ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  keyPress: 275
+--- !u!70 &6800984449978850441
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -152,42 +179,6 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.412, y: 2.116}
-    newSize: {x: 2.1, y: 2.388}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 2.412, y: 2.116}
-  m_EdgeRadius: 0
---- !u!114 &9157905792081432292
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280949355608910958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df8ecb79b14d9f74fbd316e7e1129153, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bpm: 120
-  beatsAhead: 4
---- !u!114 &1657103780171460323
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1280949355608910958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3962c74b66ccaf647a57aaf42a876ab3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keyPress: 275
+  m_Offset: {x: -0.113499776, y: -0.006961214}
+  m_Size: {x: 2.2149298, y: 0.91073096}
+  m_Direction: 1

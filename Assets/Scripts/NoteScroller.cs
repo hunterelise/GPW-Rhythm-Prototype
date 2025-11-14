@@ -3,7 +3,7 @@ using UnityEngine;
 public class NoteScroller : MonoBehaviour
 {
     [Header("BPM Settings")]
-    public float bpm = 120f;
+    public float bpm = 100f;
     public float beatsAhead = 4f;  // how many beats before the target to spawn
 
     // Hard-coded target position 

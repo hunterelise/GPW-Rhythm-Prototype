@@ -2,7 +2,6 @@ using UnityEngine;
 
 [DefaultExecutionOrder(100)]
 [RequireComponent(typeof(SpriteRenderer))]
-[RequireComponent(typeof(TrailRenderer))]
 public class HoldNoteTrail : MonoBehaviour
 {
     [Header("Input")]
@@ -13,7 +12,7 @@ public class HoldNoteTrail : MonoBehaviour
     public Sprite pressedSprite;
 
     [Header("Timing & Movement")]
-    public float holdDuration = 1.5f;
+    public float holdDuration = 3f;
     public float scrollSpeed = 4f;
 
     [Header("Behaviour")]
@@ -32,34 +31,34 @@ public class HoldNoteTrail : MonoBehaviour
     void Awake()
     {
         SR = GetComponent<SpriteRenderer>();
-        TR = GetComponent<TrailRenderer>();
-
-        // Trail setup
-        TR.emitting = true;
-        TR.autodestruct = false;
-        TR.time = holdDuration;
-        originalTrailTime = TR.time;
-
-        // Set world/local space safely across Unity versions
-        try
-        {
-            // Older versions: useWorldSpace
-            var prop = TR.GetType().GetProperty("useWorldSpace");
-            if (prop != null)
-                prop.SetValue(TR, false, null);
-        }
-        catch { /* ignore version differences */ }
-
+        TR = GetComponentInChildren<TrailRenderer>(); // get from child
         rb2d = GetComponent<Rigidbody2D>();
+
+        if (TR != null)
+        {
+            TR.emitting = true;
+            TR.autodestruct = false;
+            TR.time = holdDuration;
+            originalTrailTime = TR.time;
+
+            // Ensure local space
+            try
+            {
+                var prop = TR.GetType().GetProperty("useWorldSpace");
+                if (prop != null)
+                    prop.SetValue(TR, false, null);
+            }
+            catch { }
+        }
     }
 
     void Update()
     {
-        // Always move if not holding
+        // Move downward if not holding
         if (!isHolding && rb2d == null)
             transform.Translate(Vector3.down * scrollSpeed * Time.deltaTime);
 
-        // Only check input if can be activated
+        // Activation logic
         if (canBeActivated && !isHolding)
         {
             if (Input.GetKeyDown(keyPress))
@@ -80,25 +79,23 @@ public class HoldNoteTrail : MonoBehaviour
                 holdTimer += Time.deltaTime;
                 TR.time = Mathf.Lerp(originalTrailTime, 0f, holdTimer / Mathf.Max(0.0001f, holdDuration));
 
-                if (holdTimer >= holdDuration)
+                if (holdTimer >= holdDuration * 0.55f)
                 {
                     Debug.Log("Hold success.");
-                    HoldSuccess(); // Destroy note here
+                    HoldSuccess();
                 }
             }
             else if (Input.GetKeyUp(keyPress))
             {
                 Debug.Log("Hold fail.");
-                HoldFail(); // Destroy note here
+                HoldFail();
             }
         }
 
-        // Offscreen cleanup for non-holding notes
+        // Offscreen cleanup
         if (!isHolding && transform.position.y < -15f)
             Destroy(gameObject);
     }
-
-
 
     void LateUpdate()
     {
@@ -112,7 +109,6 @@ public class HoldNoteTrail : MonoBehaviour
         TR.emitting = true;
         isHolding = true;
         holdTimer = 0f;
-
         frozenY = transform.position.y;
 
         if (rb2d != null)
